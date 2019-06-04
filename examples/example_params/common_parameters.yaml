@@ -28,6 +28,7 @@ base:
         - 300
         - 300
         - 300
+        dropout: 0.05
         batch_size: 1024
         loss_one_step_weight: 1
         loss_n_step_weight: 1
