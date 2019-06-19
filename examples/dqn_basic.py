@@ -3,6 +3,8 @@
 # This work is licensed under the terms of the MIT license.
 # For a copy, see <https://opensource.org/licenses/MIT>.
 # ========================================================
+from diadem import datamanager
+from diadem.datamanager.data_manager_csv import DataManagerCSV
 
 
 """
@@ -28,9 +30,12 @@ def run_dqn_algorithm(parameter_files):
     exp_dir = "tmp_exp_dir"
     params = Params(filename=parameter_files)
     environment = GymEnvironment(params=params['environment'])
+    datamanager = DataManagerCSV(basedir=data_dir)
+    datamanager.set_train_data("gap1_2") #gap1_2_train
+    datamanager.set_test_data("gap1_2") # gap1_2_test
     context = AgentContext(
         environment=environment,
-        datamanager=None,
+        datamanager=datamanager,
         preprocessor=Normalization(environment=environment),
         optimizer=tf.train.AdamOptimizer,
         summary_service=ConsoleSummary()
